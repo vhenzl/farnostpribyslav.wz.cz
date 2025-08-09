@@ -72,7 +72,7 @@ Notes for the archive UI:
 
 ## Photo model (foto_*)
 
-The photo gallery for an article is defined by three fields: `foto_nazev`, `foto_pocet`, and `foto_popisek`. Files live in the repository’s `foto/` folder.
+The photo gallery for an article is defined by three fields: `foto_nazev`, `foto_pocet`, and `foto_popisek`. Files live in the repository’s `data/foto/` folder.
 
 - File naming convention (as implemented in legacy PHP):
   - Path: `foto/{rokzpravy}_{foto_nazev}_{i}.jpg` where `i` is 1..`foto_pocet`.
@@ -91,7 +91,7 @@ Important quirks and edge cases:
 
 - If `foto_popisek` is empty or contains fewer entries than `foto_pocet`, the code still renders images and uses an empty string for missing captions. This yields empty alt text and headings but no fatal error (just PHP notices in verbose modes).
 - Captions may include non-ASCII characters and even HTML; data are stored in `utf8mb4`. Ensure the UI encodes `foto_popisek` correctly (use `http_build_query(['fp' => [ ... ]])`-style encoding when saving) and avoids double-escaping. The legacy code applies `stripslashes()` when outputting captions.
-- The gallery only looks in the top-level `foto/` directory; there is no per-article subfolder.
+- The gallery only looks in the `data/foto/` directory; there is no per-article subfolder.
 
 Rendering notes for photos (read-only):
 
