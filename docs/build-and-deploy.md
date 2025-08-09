@@ -15,7 +15,7 @@ Decision criteria:
 
 ## Build pipeline
 
-1. Configure DB env vars for build (read-only credentials).
+1. Configure DATABASE_URL for build (read-only credentials).
 2. `pnpm build` – run SSG; during build, data loaders query MySQL directly.
 3. Optional: `pnpm validate` – link and HTML validation.
 

@@ -24,15 +24,13 @@ Outputs are written to `out/` (HTML + optional `.txt` snapshots produced by Next
 
 ## Environment variables
 
-Either provide a single URL or discrete values:
+Provide a single connection URL:
 
 - DATABASE_URL=mysql://user:pass@host:3306/dbname
-- or
-  - DB_HOST=...
-  - DB_PORT=3306
-  - DB_USER=...
-  - DB_PASSWORD=...
-  - DB_NAME=...
+
+Notes:
+- DB data timestamps are stored in Prague time (Europe/Prague). We stringify using SQL `DATE_FORMAT` and avoid JS timezone conversions.
+- Ensure your MySQL user has read-only access sufficient for SELECTs used during build.
 
 ## Notes
 

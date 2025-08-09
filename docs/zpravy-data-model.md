@@ -48,6 +48,7 @@ Columns (from database.sql, with observed usage):
 - `komentar` int(1) unsigned DEFAULT 0
   - Comment toggle (0/1). When 1, the detail view renders the comments module. Business logic for comments is out of scope here.
 - `datum_utc` datetime NOT NULL
+  - Misnamed in legacy schema: values are in local Prague time (Europe/Prague), not UTC. In this project we treat it as local time and alias it to `datum_iso` in queries when needed.
   - Canonical timestamp used for date formatting in UI (day, month, year, weekday, time). Listing and detail derive display fields from this value.
 
 Key behaviors and constraints observed in code (`_zpravy.php`):
