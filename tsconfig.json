@@ -2,11 +2,32 @@
   "extends": [
     "@tsconfig/node24/tsconfig",
     "@tsconfig/node-ts/tsconfig",
-    "@tsconfig/strictest/tsconfig",
+    "@tsconfig/strictest/tsconfig"
   ],
   "compilerOptions": {
     "noEmit": true,
+    "jsx": "preserve",
+    "moduleResolution": "bundler",
+  "module": "esnext",
+    "skipLibCheck": true,
+    "allowJs": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["src", "eslint.config.mjs"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "app",
+    "eslint.config.mjs",
+    "next-env.d.ts",
+    "src",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

@@ -15,3 +15,8 @@ Thumbs.db
 
 # Misc
 .env
+
+# Next.js
+.next/
+out/
+public/foto/
