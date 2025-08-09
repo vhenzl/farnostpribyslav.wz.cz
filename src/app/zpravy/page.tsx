@@ -7,10 +7,10 @@ export const metadata = { title: 'Zprávy' };
 export default async function ZpravyPage(): Promise<JSX.Element> {
   const zpravy = await getAllZpravy();
   const grouped = new Map<number, typeof zpravy>();
-  for (const z of zpravy) {
-    const arr = grouped.get(z.rok) ?? [];
-    arr.push(z);
-    grouped.set(z.rok, arr);
+  for (const item of zpravy) {
+    const arr = grouped.get(item.rok) ?? [];
+    arr.push(item);
+    grouped.set(item.rok, arr);
   }
   const years = Array.from(grouped.keys()).sort((a, b) => b - a);
   return (
@@ -20,13 +20,13 @@ export default async function ZpravyPage(): Promise<JSX.Element> {
         <section key={rok} className="year-section">
           <h2 id={`rok-${rok}`} className="year-heading">{rok}</h2>
           <ul className="zpravy-list">
-            {grouped.get(rok)!.map(z => (
-              <li key={`${z.rok}-${z.idr}`} className="zpravy-item">
-                <Link href={`/zpravy/${z.rok}-${z.idr}`}>{z.nazev}</Link>
+            {grouped.get(rok)!.map(x => (
+              <li key={`${x.rok}-${x.idr}`} className="zpravy-item">
+                <Link href={`/zpravy/${x.rok}-${x.idr}`}>{x.nazev}</Link>
                 <span> </span>
                 <small>
                   <span>— </span>
-                  <span>{z.autor}</span>
+                  <span>{x.autor}</span>
                 </small>
               </li>
             ))}
