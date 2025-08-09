@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { JSX } from 'react';
-import { fotoPath, getAllZpravy, parseFotkyPopisek } from '../../../lib/content';
+import { fotoPath, getAllZpravy, getPublishersMap, parseFotkyPopisek } from '../../../lib/content';
 
 export async function generateStaticParams() {
   const rows = await getAllZpravy();
@@ -20,6 +20,13 @@ export default async function ZpravaDetail({ params }: PageProps): Promise<JSX.E
   const z = rows.find(r => r.rok === rok && r.idr === idr);
   if (!z) return notFound();
   const captions = parseFotkyPopisek(z.foto_popisek);
+  const pubMap = await getPublishersMap();
+  const pub = pubMap.get(z.vlozil);
+  // Prev/next across years
+  const sorted = [...rows].sort((a, b) => (a.rok === b.rok ? a.idr - b.idr : a.rok - b.rok));
+  const idx = sorted.findIndex(r => r.rok === z.rok && r.idr === z.idr);
+  const prev = idx > 0 ? sorted[idx - 1] : undefined;
+  const next = idx >= 0 && idx < sorted.length - 1 ? sorted[idx + 1] : undefined;
   return (
     <article>
       <h1>{z.nazev}</h1>
@@ -36,6 +43,33 @@ export default async function ZpravaDetail({ params }: PageProps): Promise<JSX.E
           </figure>
         );
       })}
+      <hr />
+      <section>
+        {pub && (
+          <p>
+            <strong>Publikoval: </strong>
+            <a href={`mailto:${pub.email}`}>{pub.name}</a>
+          </p>
+        )}
+        <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span>
+            {prev && (
+              <a href={`/zpravy/${prev.rok}-${prev.idr}`}>
+                <span>&larr; </span>
+                <span>{prev.nazev}</span>
+              </a>
+            )}
+          </span>
+          <span>
+            {next && (
+              <a href={`/zpravy/${next.rok}-${next.idr}`}>
+                <span>{next.nazev}</span>
+                <span> &rarr;</span>
+              </a>
+            )}
+          </span>
+        </nav>
+      </section>
     </article>
   );
 }
