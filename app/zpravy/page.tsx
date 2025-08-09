@@ -14,14 +14,14 @@ export default async function ZpravyPage(): Promise<JSX.Element> {
   }
   const years = Array.from(grouped.keys()).sort((a, b) => b - a);
   return (
-    <section>
+    <section className="prose">
       <h1>Zprávy</h1>
       {years.map(rok => (
-        <section key={rok}>
-          <h2 id={`rok-${rok}`}>{rok}</h2>
-          <ul>
+        <section key={rok} className="year-section">
+          <h2 id={`rok-${rok}`} className="year-heading">{rok}</h2>
+          <ul className="zpravy-list">
             {grouped.get(rok)!.map(z => (
-              <li key={`${z.rok}-${z.idr}`}>
+              <li key={`${z.rok}-${z.idr}`} className="zpravy-item">
                 <Link href={`/zpravy/${z.rok}-${z.idr}`}>{z.nazev}</Link>
                 <span> </span>
                 <small>

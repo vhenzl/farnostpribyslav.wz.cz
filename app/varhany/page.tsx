@@ -7,9 +7,9 @@ export const metadata = { title: 'Opravy varhan' };
 export default async function VarhanyListPage(): Promise<JSX.Element> {
   const items: VarhanyItem[] = await listVarhany();
   return (
-    <section>
+    <section className="prose">
       <h1>Opravy varhan</h1>
-      <ul>
+      <ul className="link-list">
         {items.map(i => (
           <li key={i.slug}>
             <Link href={`/varhany/${i.slug}`}>{i.title}</Link>

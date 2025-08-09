@@ -11,20 +11,26 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
   return (
     <html lang="cs">
       <body>
-        <header style={{ padding: '1rem' }}>
-          <nav style={{ display: 'flex', gap: '1rem' }}>
-            <Link href="/">Domů</Link>
-            <Link href="/zpravy">Zprávy</Link>
-            <Link href="/varhany">Opravy varhan</Link>
-            <Link href="/o-webu">O webu</Link>
-          </nav>
+        <header className="site-header">
+          <div className="container brand">
+            <div className="brand-title">Farnost Přibyslav – Webarchiv</div>
+            <nav className="main-nav">
+              <Link href="/">Domů</Link>
+              <Link href="/zpravy">Zprávy</Link>
+              <Link href="/varhany">Opravy varhan</Link>
+              <Link href="/o-webu">O webu</Link>
+            </nav>
+          </div>
         </header>
-        <main style={{ padding: '1rem', maxWidth: 900, margin: '0 auto' }}>{children}</main>
-        <footer style={{ padding: '2rem', textAlign: 'center', color: '#666' }}>
-          <span>© </span>
-          <span>{new Date().getFullYear()}</span>
-          <span> </span>
-          <span>Webarchiv farnosti Přibyslav</span>
+        <main className="container" style={{ padding: '1rem 0' }}>{children}</main>
+        <footer className="site-footer">
+          <div className="container" style={{ textAlign: 'center' }}>
+            <span>
+              <span>© </span>
+              <span>{new Date().getFullYear()}</span>
+              <span> Webarchiv farnosti Přibyslav</span>
+            </span>
+          </div>
         </footer>
       </body>
     </html>
