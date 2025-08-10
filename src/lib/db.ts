@@ -8,9 +8,14 @@ export function getPool(): mysql.Pool {
   if (!pool) {
     const url = process.env['DATABASE_URL'];
     if (!url) throw new Error('Missing required env DATABASE_URL');
-    // Note: We rely on MySQL server/session timezone; data are stored in Prague time.
-    // We format dates in SQL (DATE_FORMAT) to strings, avoiding JS timezone conversions.
-    pool = mysql.createPool(url);
+    pool = mysql.createPool({
+      uri: url,
+      timezone: 'local', // local is the default, but let's be explicit
+    });
+    pool.on('connection', (conn) => {
+      // Set session time zone to Europe/Prague for each connection
+      void conn.query("SET time_zone = 'Europe/Prague'");
+    });
   }
   return pool;
 }
