@@ -1,21 +1,16 @@
-import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import type { JSX } from 'react';
-import { listVarhany, type VarhanyItem } from '../../lib/varhany';
+import { getVarhanyBySlug } from '../../lib/varhany';
 
-export const metadata = { title: 'Opravy varhan' };
+export const metadata = { title: 'Opravy varhan ve farnosti' };
 
-export default async function VarhanyListPage(): Promise<JSX.Element> {
-  const items: VarhanyItem[] = await listVarhany();
+export default async function VarhanyIndex(): Promise<JSX.Element> {
+  const item = await getVarhanyBySlug('index');
+  if (!item) return notFound();
   return (
-    <section className="prose">
-      <h1>Opravy varhan</h1>
-      <ul className="link-list">
-        {items.map(i => (
-          <li key={i.slug}>
-            <Link href={`/varhany/${i.slug}`}>{i.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <article className="prose">
+      <h1>{item.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: item.bodyHtml }} />
+    </article>
   );
 }
