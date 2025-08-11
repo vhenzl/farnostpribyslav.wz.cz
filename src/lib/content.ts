@@ -12,7 +12,7 @@ const ZpravaRow = z.object({
   foto_pocet: z.number(),
   foto_popisek: z.string(),
   vlozil: z.number(),
-  datum_iso: z.string(), // formatted as 'YYYY-MM-DD HH:mm:ss' in local time
+  datum_iso: z.string(), // DATETIME 'YYYY-MM-DD HH:mm:ss' in Europe/Prague time zone
 });
 export type Zprava = z.infer<typeof ZpravaRow>;
 
@@ -27,7 +27,7 @@ export type Publisher = { id: number; name: string; email: string };
 export async function getAllZpravy(): Promise<Zprava[]> {
   const rows = await query<unknown>(
     `SELECT id, idr, rok, nazev, text, autor, foto_nazev, foto_pocet, foto_popisek, vlozil,
-            DATE_FORMAT(datum_utc, '%Y-%m-%d %H:%i:%s') as datum_iso
+            datum_utc as datum_iso
        FROM tab_zpravy
    ORDER BY rok DESC, idr DESC`,
   );
@@ -64,7 +64,7 @@ export async function getZpravaBySlug(slug: string): Promise<{
   // Fetch the single item
   const itemRows = await query<unknown>(
     `SELECT id, idr, rok, nazev, text, autor, foto_nazev, foto_pocet, foto_popisek, vlozil,
-            DATE_FORMAT(datum_utc, '%Y-%m-%d %H:%i:%s') as datum_iso
+            datum_utc as datum_iso
        FROM tab_zpravy WHERE rok = ? AND idr = ? LIMIT 1`,
     [rok, idr],
   );
@@ -75,7 +75,7 @@ export async function getZpravaBySlug(slug: string): Promise<{
   const prevRows = await query<unknown>(
     `(
        SELECT id, idr, rok, nazev, text, autor, foto_nazev, foto_pocet, foto_popisek, vlozil,
-              DATE_FORMAT(datum_utc, '%Y-%m-%d %H:%i:%s') as datum_iso
+              datum_utc as datum_iso
          FROM tab_zpravy
         WHERE rok = ? AND idr < ?
      ORDER BY idr DESC
@@ -85,7 +85,7 @@ export async function getZpravaBySlug(slug: string): Promise<{
      (
        SELECT z.* FROM (
          SELECT id, idr, rok, nazev, text, autor, foto_nazev, foto_pocet, foto_popisek, vlozil,
-                DATE_FORMAT(datum_utc, '%Y-%m-%d %H:%i:%s') as datum_iso
+                datum_utc as datum_iso
            FROM tab_zpravy
           WHERE rok = (SELECT MAX(rok) FROM tab_zpravy WHERE rok < ?)
        ORDER BY idr DESC
@@ -101,7 +101,7 @@ export async function getZpravaBySlug(slug: string): Promise<{
   const nextRows = await query<unknown>(
     `(
        SELECT id, idr, rok, nazev, text, autor, foto_nazev, foto_pocet, foto_popisek, vlozil,
-              DATE_FORMAT(datum_utc, '%Y-%m-%d %H:%i:%s') as datum_iso
+              datum_utc as datum_iso
          FROM tab_zpravy
         WHERE rok = ? AND idr > ?
      ORDER BY idr ASC
@@ -111,7 +111,7 @@ export async function getZpravaBySlug(slug: string): Promise<{
      (
        SELECT z.* FROM (
          SELECT id, idr, rok, nazev, text, autor, foto_nazev, foto_pocet, foto_popisek, vlozil,
-                DATE_FORMAT(datum_utc, '%Y-%m-%d %H:%i:%s') as datum_iso
+                datum_utc as datum_iso
            FROM tab_zpravy
           WHERE rok = (SELECT MIN(rok) FROM tab_zpravy WHERE rok > ?)
        ORDER BY idr ASC
