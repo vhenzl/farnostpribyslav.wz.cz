@@ -5,6 +5,9 @@ import stylistic from '@stylistic/eslint-plugin';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
+  {
+    ignores: ['.next/**', 'out/**'],
+  },
   eslint.configs.recommended,
   tseslint.configs.recommendedTypeChecked,
   {

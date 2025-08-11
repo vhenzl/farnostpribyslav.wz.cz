@@ -8,7 +8,7 @@
     "noEmit": true,
     "jsx": "preserve",
     "moduleResolution": "bundler",
-  "module": "esnext",
+    "module": "esnext",
     "skipLibCheck": true,
     "allowJs": true,
     "incremental": true,
@@ -23,11 +23,13 @@
     "eslint.config.mjs",
     "next.config.mjs",
     "next-env.d.ts",
+    "public",
+    "scripts",
     "src",
     ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "out"
   ]
 }
