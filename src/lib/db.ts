@@ -10,6 +10,7 @@ export function getPool(): mysql.Pool {
     if (!url) throw new Error('Missing required env DATABASE_URL');
     pool = mysql.createPool({
       uri: url,
+      charset: 'utf8mb4',
       // timezone can be only 'Z', 'local' or offset;
       // TZs like Europe/Prague are not supported by mysql2
       dateStrings: true, // prevents automatic conversion to Date
