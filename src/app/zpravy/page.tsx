@@ -1,8 +1,20 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX } from 'react';
 import { getAllZpravy } from '../../lib/content';
+import { toAbsoluteUrl } from '../../lib/site';
 
-export const metadata = { title: 'Zprávy' };
+export const metadata: Metadata = {
+  title: 'Zprávy 2001–2008',
+  description: 'Archiv webových zpráv farnosti Přibyslav z let 2001 až 2008.',
+  alternates: { canonical: toAbsoluteUrl('/zpravy') },
+  openGraph: {
+    type: 'website',
+    url: toAbsoluteUrl('/zpravy'),
+    title: 'Zprávy 2001–2008',
+    description: 'Archiv webových zpráv farnosti Přibyslav z let 2001 až 2008.',
+  },
+};
 
 export default async function ZpravyPage(): Promise<JSX.Element> {
   const zpravy = await getAllZpravy();

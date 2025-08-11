@@ -20,3 +20,10 @@ export function formatPublished(date: Date): string {
     timeZone: 'Europe/Prague',
   }).format(date);
 }
+
+export function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat('cs-CZ', {
+    dateStyle: 'long',
+    timeZone: 'Europe/Prague',
+  }).format(date);
+}

@@ -1,6 +1,18 @@
-export const metadata = { title: 'O webu' };
-
+import type { Metadata } from 'next';
 import type { JSX } from 'react';
+import { toAbsoluteUrl } from '../../lib/site';
+
+export const metadata: Metadata = {
+  title: 'O webu',
+  description: 'Informace o archivu webových stránek farnosti Přibyslav.',
+  alternates: { canonical: toAbsoluteUrl('/o-webu') },
+  openGraph: {
+    type: 'website',
+    url: toAbsoluteUrl('/o-webu'),
+    title: 'O webu',
+    description: 'Informace o archivu webových stránek farnosti Přibyslav.',
+  },
+};
 
 export default function AboutPage(): JSX.Element {
   return (

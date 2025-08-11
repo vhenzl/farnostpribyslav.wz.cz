@@ -1,10 +1,24 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX, ReactNode } from 'react';
+import { getSiteUrl, toAbsoluteUrl } from '../lib/site';
 import './global.css';
 
-export const metadata = {
-  title: 'Farnost Přibyslav – Webarchiv',
-  description: 'Statický archiv starého webu farnosti Přibyslav (2002–2008).',
+export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: 'Archiv farnosti Přibyslav',
+    template: '%s | Archiv farnosti Přibyslav',
+  },
+  description: 'Archiv webových stránek farnosti Přibyslav z let 2001 až 2008.',
+  openGraph: {
+    siteName: 'Archiv farnosti Přibyslav',
+    type: 'website',
+    locale: 'cs_CZ',
+    url: toAbsoluteUrl('/'),
+    title: 'Archiv farnosti Přibyslav',
+    description: 'Archiv webových stránek farnosti Přibyslav z let 2001 až 2008.',
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {

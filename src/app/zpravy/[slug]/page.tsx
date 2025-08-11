@@ -1,16 +1,61 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import type { JSX } from 'react';
-import { fotoPath, getAllZpravy, getPublisherById, getZpravaBySlug, parseFotkyPopisek } from '../../../lib/content';
-import { createDateFromDbDatetime, formatPublished } from '../../../lib/date-utils';
+import { fotoPath, getAllZpravy, getPublisherById, getZpravaBySlug, parseFotkyPopisek, type Zprava } from '../../../lib/content';
+import { createDateFromDbDatetime, formatDate, formatPublished } from '../../../lib/date-utils';
+import { toAbsoluteUrl } from '../../../lib/site';
 
 export async function generateStaticParams() {
   const rows = await getAllZpravy();
   return rows.map(z => ({ slug: `${z.rok}-${z.idr}` }));
 }
 
-export const metadata = { title: 'Zprávy – detail' };
-
 type PageProps = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const { item } = await getZpravaBySlug(slug);
+  if (!item) throw new Error(`Zprava with slug ${slug} not found`);
+
+  const { title, description, url, publishedTime } = createMetadata(item);
+
+  return {
+    title: `${title} | Zprávy ${item.rok}`,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      url,
+      title,
+      description,
+      publishedTime,
+    },
+  } satisfies Metadata;
+}
+
+function createMetadata(item: Zprava) {
+  const url = toAbsoluteUrl(`/zpravy/${item.rok}-${item.idr}`);
+  const title = item.nazev;
+  const published = createDateFromDbDatetime(item.datum_iso);
+  const description = `Archiv webového článku farnosti Přibyslav ze dne ${formatDate(published)}.`;
+  const publishedTime = published.toISOString();
+  return { title, description, url, publishedTime };
+}
+
+function createJsonLd(zprava: Zprava) {
+  const metadata = createMetadata(zprava);
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': metadata.title,
+    'description': metadata.description,
+    'author': zprava.autor,
+    'url': metadata.url,
+    'datePublished': metadata.publishedTime,
+  } as const;
+  return jsonLd;
+}
 
 export default async function ZpravaDetail({ params }: PageProps): Promise<JSX.Element> {
   const { slug } = await params;
@@ -31,6 +76,10 @@ export default async function ZpravaDetail({ params }: PageProps): Promise<JSX.E
 
   return (
     <article className="prose">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(createJsonLd(z)) }}
+      />
       <p className="breadcrumbs">
         <a href="/zpravy">Zprávy</a>
         <span> / </span>
@@ -42,11 +91,12 @@ export default async function ZpravaDetail({ params }: PageProps): Promise<JSX.E
       {Array.from({ length: z.foto_pocet }).map((_, x) => {
         const i1 = x + 1;
         const src = fotoPath(z.rok, z.foto_nazev, i1);
-        const alt = captions[x] ?? '';
+        const caption = captions[x];
+        const alt = caption ?? `${z.nazev} – fotografie ${i1}`;
         return (
           <figure key={i1}>
             <img src={src} alt={alt} />
-            {alt ? <figcaption>{alt}</figcaption> : null}
+            {caption ? <figcaption>{caption}</figcaption> : null}
           </figure>
         );
       })}
