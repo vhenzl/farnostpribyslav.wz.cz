@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { JSX } from 'react';
 import { fotoPath, getAllZpravy, getPublisherById, getZpravaBySlug, parseFotkyPopisek } from '../../../lib/content';
+import { createDateFromDbDatetime, formatPublished } from '../../../lib/date-utils';
 
 export async function generateStaticParams() {
   const rows = await getAllZpravy();
@@ -22,8 +23,12 @@ export default async function ZpravaDetail({ params }: PageProps): Promise<JSX.E
   const z = data.item;
   const captions = parseFotkyPopisek(z.foto_popisek);
   const pub = await getPublisherById(z.vlozil);
+  if (!pub) throw new Error(`Publisher ${z.vlozil} not found`);
+
   const prev = data.prev;
   const next = data.next;
+  const publishedDate = createDateFromDbDatetime(z.datum_iso);
+
   return (
     <article className="prose">
       <p className="breadcrumbs">
@@ -47,12 +52,13 @@ export default async function ZpravaDetail({ params }: PageProps): Promise<JSX.E
       })}
       <hr />
       <section className="article-meta">
-        {pub && (
-          <p>
-            <strong>Publikoval: </strong>
-            <a href={`mailto:${pub.email}`}>{pub.name}</a>
-          </p>
-        )}
+        <p>
+          Publikoval
+          {' '}
+          <span>{pub.name}</span>
+          {' '}
+          <time dateTime={publishedDate.toISOString()}>{formatPublished(publishedDate)}</time>
+        </p>
         <nav className="article-nav">
           <span>
             {prev && (
