@@ -20,18 +20,25 @@ export default async function Page(): Promise<JSX.Element> {
   const years: number[] = await getYearsSummary();
   return (
     <section className="prose">
-      <h1>Webarchiv farnosti Přibyslav</h1>
+      <h1>Farnost Přibyslav</h1>
+      <p>Archiv webových stránek farnosti Přibyslav z let 2001 až 2008.</p>
       <p>
-        Stránky uchovávají vybrané obsahy z let 2002–2008. Najdete zde Zprávy, sekci o
-        opravách varhan a krátké představení tohoto archivu.
+        Stránky uchovávají vybraný obsah prvního farního webu. Najdete zde
+        {' '}
+        <Link href="/zpravy">zprávy</Link>
+        {' '}
+        o událostech ve farnosti, články o
+        {' '}
+        <Link href="/varhany">opravách varhan</Link>
+        {' '}
+        a v sekci
+        {' '}
+        <Link href="/o-webu">O webu</Link>
+        {' '}
+        stručnou historii těchto stránek.
       </p>
-      <ul className="link-list">
-        <li><Link href="/zpravy">Zprávy</Link></li>
-        <li><Link href="/varhany">Opravy varhan</Link></li>
-        <li><Link href="/o-webu">O webu</Link></li>
-      </ul>
-      <h2>Přehled ročníků</h2>
-      <p>Rychlé odkazy na roky ze Zpráv:</p>
+
+      <p>Rychlé odkazy na zprávy z jednotlivých let:</p>
       <div className="year-chips">
         {years.map(y => (
           <Link key={y} className="chip" href={`/zpravy#rok-${y}`}>
@@ -39,6 +46,12 @@ export default async function Page(): Promise<JSX.Element> {
           </Link>
         ))}
       </div>
+      <p>
+        Současné webové stránky farnosti Přibyslav naleznete na
+        {' '}
+        <a href="https://www.farnostpribyslav.cz">www.farnostpribyslav.cz</a>
+        .
+      </p>
     </section>
   );
 }
