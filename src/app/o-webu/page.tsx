@@ -1,6 +1,6 @@
+import { toAbsoluteUrl } from '@/lib/site';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
-import { toAbsoluteUrl } from '../../lib/site';
 
 export const metadata: Metadata = {
   title: 'O webu',

@@ -1,7 +1,7 @@
+import { getSiteUrl, toAbsoluteUrl } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX, ReactNode } from 'react';
-import { getSiteUrl, toAbsoluteUrl } from '../lib/site';
 import './global.css';
 
 export const metadata: Metadata = {

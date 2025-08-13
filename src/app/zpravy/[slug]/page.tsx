@@ -1,10 +1,10 @@
+import { createDateFromDbDatetime, formatDate, formatPublished } from '@/lib/date-utils';
+import { toAbsoluteUrl } from '@/lib/site';
+import { getPublisherById } from '@/lib/users';
+import { fotoPath, getAllZpravy, getZpravaBySlug, type Zprava } from '@/lib/zpravy';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import type { JSX } from 'react';
-import { createDateFromDbDatetime, formatDate, formatPublished } from '../../../lib/date-utils';
-import { toAbsoluteUrl } from '../../../lib/site';
-import { getPublisherById } from '../../../lib/users';
-import { fotoPath, getAllZpravy, getZpravaBySlug, type Zprava } from '../../../lib/zpravy';
 
 export async function generateStaticParams() {
   const rows = await getAllZpravy();

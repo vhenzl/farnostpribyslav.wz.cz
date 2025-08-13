@@ -1,8 +1,8 @@
+import { toAbsoluteUrl } from '@/lib/site';
+import { getVarhanyBySlug } from '@/lib/varhany';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import type { JSX } from 'react';
-import { toAbsoluteUrl } from '../../lib/site';
-import { getVarhanyBySlug } from '../../lib/varhany';
 
 export const metadata: Metadata = {
   title: 'Opravy varhan ve farnosti',

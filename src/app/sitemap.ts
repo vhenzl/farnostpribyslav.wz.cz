@@ -1,7 +1,7 @@
+import { toAbsoluteUrl } from '@/lib/site';
+import { listVarhany } from '@/lib/varhany';
+import { getAllZpravy } from '@/lib/zpravy';
 import type { MetadataRoute } from 'next';
-import { toAbsoluteUrl } from '../lib/site';
-import { listVarhany } from '../lib/varhany';
-import { getAllZpravy } from '../lib/zpravy';
 
 export const dynamic = 'force-static';
 

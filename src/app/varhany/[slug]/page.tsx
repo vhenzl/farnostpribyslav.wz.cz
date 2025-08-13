@@ -1,8 +1,8 @@
+import { toAbsoluteUrl } from '@/lib/site';
+import { getVarhanyBySlug, listVarhany } from '@/lib/varhany';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import type { JSX } from 'react';
-import { toAbsoluteUrl } from '../../../lib/site';
-import { getVarhanyBySlug, listVarhany } from '../../../lib/varhany';
 
 export async function generateStaticParams() {
   const all = (await listVarhany()).filter(x => x.slug !== 'index');
