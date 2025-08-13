@@ -2,22 +2,11 @@
   "extends": [
     "@tsconfig/node22/tsconfig",
     "@tsconfig/node-ts/tsconfig",
+    "@tsconfig/next/tsconfig",
     "@tsconfig/strictest/tsconfig"
   ],
   "compilerOptions": {
     "noEmit": true,
-    "jsx": "preserve",
-    "moduleResolution": "bundler",
-    "module": "esnext",
-    "skipLibCheck": true,
-    "allowJs": true,
-    "incremental": true,
-    "resolveJsonModule": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
   },
   "include": [
     "eslint.config.mjs",
