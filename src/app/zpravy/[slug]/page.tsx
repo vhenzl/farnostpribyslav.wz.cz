@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import type { JSX } from 'react';
-import { fotoPath, getAllZpravy, getPublisherById, getZpravaBySlug, parseFotkyPopisek, type Zprava } from '../../../lib/content';
 import { createDateFromDbDatetime, formatDate, formatPublished } from '../../../lib/date-utils';
 import { toAbsoluteUrl } from '../../../lib/site';
+import { getPublisherById } from '../../../lib/users';
+import { fotoPath, getAllZpravy, getZpravaBySlug, type Zprava } from '../../../lib/zpravy';
 
 export async function generateStaticParams() {
   const rows = await getAllZpravy();
@@ -66,7 +67,7 @@ export default async function ZpravaDetail({ params }: PageProps): Promise<JSX.E
     return notFound();
   }
   const z = data.item;
-  const captions = parseFotkyPopisek(z.foto_popisek);
+  const captions = z.fotky ?? [];
   const pub = await getPublisherById(z.vlozil);
   if (!pub) throw new Error(`Publisher ${z.vlozil} not found`);
 

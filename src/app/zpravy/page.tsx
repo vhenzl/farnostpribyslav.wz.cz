@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX } from 'react';
-import { getAllZpravy } from '../../lib/content';
 import { toAbsoluteUrl } from '../../lib/site';
+import { getAllZpravy } from '../../lib/zpravy';
 
 export const metadata: Metadata = {
   title: 'Zprávy 2001–2008',

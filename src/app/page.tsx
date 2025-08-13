@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX } from 'react';
-import { getYearsSummary } from '../lib/content';
 import { toAbsoluteUrl } from '../lib/site';
+import { getYearsSummary } from '../lib/zpravy';
 
 export const metadata: Metadata = {
   title: 'Archiv farnosti Přibyslav',
