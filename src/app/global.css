@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 * { box-sizing: border-box; }
 :root {
 	/* Warm palette closely matching the legacy orange/yellow look */

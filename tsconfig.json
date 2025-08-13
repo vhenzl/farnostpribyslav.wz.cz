@@ -15,6 +15,7 @@
     "eslint.config.mjs",
     "next.config.mjs",
     "next-env.d.ts",
+    "postcss.config.mjs",
     "public",
     "scripts",
     "src",
