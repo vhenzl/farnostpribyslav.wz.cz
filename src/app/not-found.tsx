@@ -2,7 +2,7 @@ import type { JSX } from 'react';
 
 export default function NotFound(): JSX.Element {
   return (
-    <section>
+    <section className="prose">
       <h1>Stránka nenalezena</h1>
       <p>
         <span>Stránku se nepodařilo najít. Zkuste pokračovat na </span>

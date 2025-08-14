@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default async function Page(): Promise<JSX.Element> {
   const years: number[] = await getYearsSummary();
   return (
-    <section>
+    <section className="prose">
       <h1>Farnost Přibyslav</h1>
       <p>Archiv webových stránek farnosti Přibyslav z let 2001 až 2008.</p>
       <p>
@@ -39,9 +39,9 @@ export default async function Page(): Promise<JSX.Element> {
       </p>
 
       <p>Rychlé odkazy na zprávy z jednotlivých let:</p>
-      <div>
+      <div className="year-chips">
         {years.map(y => (
-          <Link key={y} href={`/zpravy#rok-${y}`}>
+          <Link key={y} className="chip" href={`/zpravy#rok-${y}`}>
             {y}
           </Link>
         ))}

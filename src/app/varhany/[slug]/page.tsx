@@ -36,7 +36,7 @@ export default async function VarhanyDetail({ params }: PageProps): Promise<JSX.
   const item = await getVarhanyBySlug(slug);
   if (!item) return notFound();
   return (
-    <article>
+    <article className="prose">
       <h1>{item.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: item.bodyHtml }} />
     </article>
