@@ -25,10 +25,10 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
   return (
     <html lang="cs">
       <body>
-        <header className="site-header">
-          <div className="container brand">
-            <div className="brand-title">Farnost Přibyslav – Webarchiv</div>
-            <nav className="main-nav">
+        <header>
+          <div>
+            <div>Farnost Přibyslav – Webarchiv</div>
+            <nav>
               <Link href="/">Domů</Link>
               <Link href="/zpravy">Zprávy</Link>
               <Link href="/varhany">Opravy varhan</Link>
@@ -36,9 +36,9 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
             </nav>
           </div>
         </header>
-        <main className="container" style={{ padding: '1rem 0' }}>{children}</main>
-        <footer className="site-footer">
-          <div className="container" style={{ textAlign: 'center' }}>
+        <main>{children}</main>
+        <footer>
+          <div>
             <span>
               <span>© </span>
               <span>{new Date().getFullYear()}</span>
