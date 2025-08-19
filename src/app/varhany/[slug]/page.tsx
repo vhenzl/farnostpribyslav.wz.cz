@@ -1,3 +1,5 @@
+import PageTitle from '@/components/page-title';
+import Prose from '@/components/prose';
 import { toAbsoluteUrl } from '@/lib/site';
 import { getVarhanyBySlug, listVarhany } from '@/lib/varhany';
 import type { Metadata } from 'next';
@@ -36,9 +38,12 @@ export default async function VarhanyDetail({ params }: PageProps): Promise<JSX.
   const item = await getVarhanyBySlug(slug);
   if (!item) return notFound();
   return (
-    <article className="prose">
-      <h1>{item.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: item.bodyHtml }} />
+    <article>
+      <PageTitle className="mb-8 mt-4">{item.title}</PageTitle>
+      <Prose
+        className="prose max-w-none"
+        dangerouslySetInnerHTML={{ __html: item.bodyHtml }}
+      />
     </article>
   );
 }

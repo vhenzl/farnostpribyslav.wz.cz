@@ -1,7 +1,8 @@
+import BrandLink from '@/components/brand-link';
+import PageTitle from '@/components/page-title';
 import { toAbsoluteUrl } from '@/lib/site';
 import { getAllZpravy } from '@/lib/zpravy';
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import type { JSX } from 'react';
 
 export const metadata: Metadata = {
@@ -26,18 +27,22 @@ export default async function ZpravyPage(): Promise<JSX.Element> {
   }
   const years = Array.from(grouped.keys()).sort((a, b) => b - a);
   return (
-    <section className="prose">
-      <h1>Zprávy</h1>
+    <section>
+      <PageTitle className="mt-4">Zprávy</PageTitle>
       {years.map(rok => (
-        <section key={rok} className="year-section">
-          <h2 id={`rok-${rok}`} className="year-heading">{rok}</h2>
-          <ul className="zpravy-list">
+        <section key={rok} className="my-8">
+          <h2 id={`rok-${rok}`} className="sticky top-0 bg-amber-100 border-b border-amber-200 p-2 text-xl font-bold text-amber-900">{rok}</h2>
+          <ul>
             {grouped.get(rok)!.map(x => (
-              <li key={`${x.rok}-${x.idr}`} className="zpravy-item">
-                <Link href={`/zpravy/${x.rok}-${x.idr}`}>{x.nazev}</Link>
+              <li key={`${x.rok}-${x.idr}`} className="p-2 border-b border-dashed border-amber-200">
+                <BrandLink
+                  href={`/zpravy/${x.rok}-${x.idr}`}
+                >
+                  {x.nazev}
+                </BrandLink>
                 <span> </span>
-                <small>
-                  <span>— </span>
+                <small className="text-gray-500">
+                  <span>—&nbsp;</span>
                   <span>{x.autor}</span>
                 </small>
               </li>
