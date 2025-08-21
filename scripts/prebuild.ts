@@ -12,13 +12,18 @@ async function copyDir(src: string, dest: string) {
   }));
 }
 
-const repoRoot = process.cwd();
-const from = path.join(repoRoot, 'data', 'foto');
-const to = path.join(repoRoot, 'public', 'foto');
+async function copyDirFromDataToPublic(dir: string) {
+  const repoRoot = process.cwd();
+  const from = path.join(repoRoot, 'data', dir);
+  const to = path.join(repoRoot, 'public', dir);
+  await copyDir(from, to);
+}
 
 try {
-  await copyDir(from, to);
-  console.log('Copied photos to public/foto');
+  await copyDirFromDataToPublic('foto');
+  await copyDirFromDataToPublic('obr');
+  console.log('Copied data to public');
 } catch (err) {
-  console.warn('Skipping photo copy:', err instanceof Error ? err.message : String(err));
+  console.warn('Data copy failed:', err instanceof Error ? err.message : String(err));
+  process.exit(1);
 }
