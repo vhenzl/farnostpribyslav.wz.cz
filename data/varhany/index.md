@@ -107,7 +107,7 @@ title: Opravy varhan ve farnosti
 
 
 <h2>Fotogalerie</h2>
-<div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+<div>
   <figure>
     <img src="/foto/2007_varhany_zp_1.jpg" alt="Filiální kostel sv. Michaela, archanděla v Žižkově Poli">
     <figcaption>Filiální kostel sv. Michaela, archanděla v Žižkově Poli</figcaption>
