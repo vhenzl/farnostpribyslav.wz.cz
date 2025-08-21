@@ -1,0 +1,34 @@
+RewriteEngine On
+RewriteBase /
+
+# home: /?page=0 -> /
+RewriteCond %{QUERY_STRING} (?:^|.*&)?page=0(?:&|$) [NC]
+RewriteRule ^(?:index\.php)?$ /? [R=301,L]
+
+# zpravy: numeric idr -> /zpravy/{year}-{idr}
+# capture year and idr in one RewriteCond (either order),
+# because only backreference from last condition is available: https://httpd.apache.org/docs/current/mod/mod_rewrite.html
+RewriteCond %{QUERY_STRING} (?:^|.*&)?page=2(?:&|$) [NC]
+RewriteCond %{QUERY_STRING} (?:^|.*&)?(?:year=(\d{4})(?:&|$).*?(?:^|.*&)?idr=(\d+)(?:&|$)|idr=(\d+)(?:&|$).*?(?:^|.*&)?year=(\d{4})(?:&|$)) [NC]
+RewriteRule ^(?:index\.php)?$ /zpravy/%1%4-%2%3? [R=301,L]
+
+# zpravy: anything else with year (including idr=up) -> /zpravy#rok-{year}
+RewriteCond %{QUERY_STRING} (?:^|.*&)?page=2(?:&|$) [NC]
+RewriteCond %{QUERY_STRING} (?:^|.*&)?year=(\d{4})(?:&|$) [NC]
+RewriteRule ^(?:index\.php)?$ /zpravy#rok-%1? [R=301,L,NE]
+
+# zpravy: page=2 without year -> list page
+RewriteCond %{QUERY_STRING} (?:^|.*&)?page=2(?:&|$) [NC]
+RewriteRule ^(?:index\.php)?$ /zpravy? [R=301,L]
+
+# varhany: /?page=11 -> /varhany
+RewriteCond %{QUERY_STRING} (?:^|.*&)?page=11(?:&|$) [NC]
+RewriteRule ^(?:index\.php)?$ /varhany? [R=301,L]
+
+# varhany: /?page=12  -> /varhany/{page}
+RewriteCond %{QUERY_STRING} (?:^|.*&)?page=12(?:&|$) [NC]
+RewriteRule ^(?:index\.php)?$ /varhany/varhany-v-zizkove-poli-jiz-zase-hraji? [R=301,L]
+
+# varhany: /?page=13  -> /varhany/{page}
+RewriteCond %{QUERY_STRING} (?:^|.*&)?page=13(?:&|$) [NC]
+RewriteRule ^(?:index\.php)?$ /varhany/verejna-sbirka-na-opravu-pribyslavskych-varhan? [R=301,L]
