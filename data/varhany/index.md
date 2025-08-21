@@ -35,8 +35,8 @@ title: Opravy varhan ve farnosti
   <dt>28. 4. 2007</dt><dd>III. benefiční koncert v Žižkově Poli na závěr veřejné sbírky.</dd>
   <dt>26. 5. 2007</dt><dd>IV. benefiční koncert v Přibyslavi.</dd>
   <dt>podzim 2007</dt><dd><del>Slavnostní koncert na ukončení oprav varhan v Žižkově Poli.</del></dd>
-  <dt>30. 9 2007</dt><dd>Slavnostní bohoslužba a požehnání opravených varhan v Žižkově Poli. Více v článku <a href="/varhany/varhany-v-zizkove-poli-jiz-zase-hraji">Varhany v Žižkově Poli již zase hrají</a>. Prohlédněte si také <a href="/?page=2&idr=19&year=2007">fotografie ze svěcení</a>.</dd>
-  <dt>8. 12. 2007</dt><dd>VI. benefiční koncert ve sklepích Kurfürstova domu. <a href="/?page=2&idr=28&year=2007">Fotografie z koncertu</a>.</dd>
+  <dt>30. 9 2007</dt><dd>Slavnostní bohoslužba a požehnání opravených varhan v Žižkově Poli. Více v článku <a href="/varhany/varhany-v-zizkove-poli-jiz-zase-hraji">Varhany v Žižkově Poli již zase hrají</a>. Prohlédněte si také <a href="/zpravy/2007-19">fotografie ze svěcení</a>.</dd>
+  <dt>8. 12. 2007</dt><dd>VI. benefiční koncert ve sklepích Kurfürstova domu. <a href="/zpravy/2007-28">Fotografie z koncertu</a>.</dd>
   <dt>2008 - ????</dt><dd>Oprava varhan v kostele Narození sv. Jana Křtitele v Přibyslavi.</dd>
 </dl>
 
