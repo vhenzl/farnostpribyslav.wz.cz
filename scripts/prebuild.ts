@@ -22,6 +22,7 @@ async function copyDirFromDataToPublic(dir: string) {
 try {
   await copyDirFromDataToPublic('foto');
   await copyDirFromDataToPublic('obr');
+  await copyDirFromDataToPublic('dokumenty');
   console.log('Copied data to public');
 } catch (err) {
   console.warn('Data copy failed:', err instanceof Error ? err.message : String(err));

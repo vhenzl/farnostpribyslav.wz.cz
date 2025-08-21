@@ -19,5 +19,6 @@ Thumbs.db
 # Next.js
 .next/
 out/
+public/dokumenty/
 public/foto/
 public/obr/
