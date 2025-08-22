@@ -103,7 +103,7 @@ export default async function ZpravaDetail({ params }: PageProps): Promise<JSX.E
           return (
             <figure key={i1}>
               <img src={src} alt={alt} />
-              {caption ? <figcaption>{caption}</figcaption> : null}
+              {caption ? <figcaption dangerouslySetInnerHTML={{ __html: caption }} /> : null}
             </figure>
           );
         })}
