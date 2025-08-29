@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build",
     "prebuild": "node scripts/prebuild.ts && node scripts/generate-previews.ts",
     "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1",
