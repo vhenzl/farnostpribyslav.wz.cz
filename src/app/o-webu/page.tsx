@@ -3,6 +3,7 @@ import Prose from '@/components/prose';
 import { toAbsoluteUrl } from '@/lib/site';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
+import Gallery from './gallery';
 
 export const metadata: Metadata = {
   title: 'O webu',
@@ -57,7 +58,7 @@ export default function AboutPage(): JSX.Element {
           <a href="/zpravy/2007-26">rozhodla</a>
           {' '}
           o vytvoření nových oficiálních stránek farnosti
-          a v létě 2008 spustil Tomáš Miškovský z
+          a v létě 2008 spustil
           {' '}
           <i>Fenomen multimedia</i>
           {' '}
@@ -88,7 +89,20 @@ export default function AboutPage(): JSX.Element {
           <strong>archiv s vybraným obsahem starého webu</strong>
           .
         </p>
+        <h2>Galerie</h2>
+        <p>
+          Část těchto snímků ukazujících vývoj farního webu pochází z
+          {' '}
+          <a href="https://web.archive.org/web/*/farnostpribyslav.wz.cz/*">Wayback Machine</a>
+          , tak jak stránky zachytil
+          {' '}
+          <i>Internet Archive</i>
+          {' '}
+          v průběhu let. Zbytek byl pořízen z lokální kopie webu v srpnu 2025.
+        </p>
       </Prose>
+
+      <Gallery />
     </article>
   );
 }
