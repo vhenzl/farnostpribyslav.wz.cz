@@ -1,3 +1,4 @@
+import { UmamiAnalytics } from '@/components/analytics';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { getSiteUrl, toAbsoluteUrl } from '@/lib/site';
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="cs" style={{ fontSize: 18 }}>
+      <UmamiAnalytics />
       <body className="grid grid-rows-[auto_1fr_auto] min-h-dvh bg-white">
         <Header />
         <main className=" bg-linear-to-b from-white via-white via-85% to-amber-100/40">
