@@ -23,6 +23,7 @@ try {
   await copyDirFromDataToPublic('foto');
   await copyDirFromDataToPublic('obr');
   await copyDirFromDataToPublic('dokumenty');
+  await copyDirFromDataToPublic('images');
   console.log('Copied data to public');
 } catch (err) {
   console.warn('Data copy failed:', err instanceof Error ? err.message : String(err));
