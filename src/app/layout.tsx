@@ -1,3 +1,4 @@
+import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { getSiteUrl, toAbsoluteUrl } from '@/lib/site';
 import type { Metadata } from 'next';
@@ -31,15 +32,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
           </div>
         </main>
-        <footer className="bg-amber-50/50 text-amber-800/70 py-8 border-t border-amber-200">
-          <div className="mx-auto max-w-4xl px-4 text-center">
-            <span>
-              <span>© </span>
-              <span>{new Date().getFullYear()}</span>
-              <span> Webarchiv farnosti Přibyslav</span>
-            </span>
-          </div>
-        </footer>
+        <Footer></Footer>
       </body>
     </html>
   );
