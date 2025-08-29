@@ -18,7 +18,9 @@ function isImageFile(file: string) {
 
 async function processImage(file: string) {
   const srcPath = path.join(IMAGES_DIR, file);
-  const destPath = path.join(PREVIEWS_DIR, file);
+  const destFile = path.format({ ...path.parse(file), base: undefined, ext: '.avif' });
+  const destPath = path.join(PREVIEWS_DIR, destFile);
+
   try {
     // Resize to required width, height is auto
     const resizedBuffer = await sharp(srcPath)
@@ -32,7 +34,7 @@ async function processImage(file: string) {
     if (meta.height > PREVIEW_MAX_HEIGHT) {
       output = resizedImage.extract({ left: 0, top: 0, width: PREVIEW_WIDTH, height: PREVIEW_MAX_HEIGHT });
     }
-    await output.toFile(destPath);
+    await output.toFormat('avif').toFile(destPath);
     console.log(`Preview created: ${destPath}`);
   } catch (err) {
     console.warn(`Failed to process ${file}:`, err instanceof Error ? err.message : String(err));

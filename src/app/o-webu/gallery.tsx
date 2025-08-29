@@ -176,7 +176,7 @@ export default function Gallery() {
             title={image.alt}
           >
             <img
-              src={`/images/previews/${image.file}`}
+              src={`/images/previews/${image.file.replace(/\.png$/, '.avif')}`}
               alt={image.alt}
               width={180}
               height={135}
