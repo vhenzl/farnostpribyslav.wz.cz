@@ -17,6 +17,7 @@ async function copyDirFromDataToPublic(dir: string) {
   const from = path.join(repoRoot, 'data', dir);
   const to = path.join(repoRoot, 'public', dir);
   await copyDir(from, to);
+  console.log(`Data copied: ${to}`);
 }
 
 try {
